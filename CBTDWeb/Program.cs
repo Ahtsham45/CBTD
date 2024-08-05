@@ -1,4 +1,5 @@
 using DataAccess;
+using DataAccess.DbInitializer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddScoped<DbInitializer>();
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
@@ -36,5 +38,15 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+SeedDatabase();
 
 app.Run();
+
+
+void SeedDatabase()
+{
+    using var scope = app.Services.CreateScope();
+    var dbInitializer = scope.ServiceProvider.GetRequiredService<DbInitializer>();
+    dbInitializer.Initialize();
+}
+
