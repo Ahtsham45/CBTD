@@ -48,6 +48,10 @@ namespace DataAccess.DbInitializer
             {
                 _db.Categories.Add(c);
             }
+
+            //manufacturers
+            //products
+
             _db.SaveChanges();
         }
     }
