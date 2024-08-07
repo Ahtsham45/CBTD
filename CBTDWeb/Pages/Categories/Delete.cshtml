@@ -26,7 +26,7 @@
                     <span asp-validation-for="objCategory.DisplayOrder" class="text-danger"></span>
 
                 </div>
-                <!--You need to hide the Id (for edit mode, so the model knows which item you’re editing) -->
+                <!--You need to hide the Id (for edit mode, so tMhe model knows which item you’re editing) -->
                 @if (Model.objCategory.Id != 0)
                 {
                     <input type="hidden" asp-for="objCategory.Id" />
