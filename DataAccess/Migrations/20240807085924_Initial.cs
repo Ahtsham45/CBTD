@@ -184,7 +184,7 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "objProducts",
+                name: "Products",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -259,12 +259,12 @@ namespace DataAccess.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_objProducts_CategoryId",
-                table: "objProducts",
+                table: "Products",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_objProducts_ManufacturerId",
-                table: "objProducts",
+                table: "Products",
                 column: "ManufacturerId");
         }
 
@@ -287,7 +287,7 @@ namespace DataAccess.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "objProducts");
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
