@@ -2,6 +2,7 @@ using DataAccess;
 using DataAccess.DbInitializer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,10 +12,16 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddIdentity<IdentityUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddScoped<DbInitializer>();
 builder.Services.AddScoped<UnitOfWork>();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+	options.LoginPath = $"/Identity/Account/Login";
+	options.LogoutPath = $"/Identity/Account/Logout";
+	options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+});
 
 builder.Services.AddRazorPages();
 

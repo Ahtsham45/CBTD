@@ -14,7 +14,7 @@ public class UnitOfWork : IUnitOfWork
     private IGenericRepository<Category> _Category;
     private IGenericRepository<Manufacturer> _Manufacturer;
     private IGenericRepository<Product> _Product;
-
+    private IGenericRepository<ApplicationUser> _ApplicationUser;
 
     public IGenericRepository<Category> Category
     {
@@ -29,7 +29,21 @@ public class UnitOfWork : IUnitOfWork
             return _Category;
         }
     }
-    public IGenericRepository<Product> Product
+
+	public IGenericRepository<ApplicationUser> ApplicationUser
+	{
+		get
+		{
+
+			if (_ApplicationUser == null)
+			{
+				_ApplicationUser = new GenericRepository<ApplicationUser>(_dbContext);
+			}
+
+			return _ApplicationUser;
+		}
+	}
+	public IGenericRepository<Product> Product
     {
         get
         {
