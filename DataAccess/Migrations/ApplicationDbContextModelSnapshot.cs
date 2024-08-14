@@ -320,6 +320,32 @@ namespace DataAccess.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("ShoppingCart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ShoppingCarts");
+                });
+
             modelBuilder.Entity("ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -415,6 +441,23 @@ namespace DataAccess.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("Manufacturer");
+                });
+
+            modelBuilder.Entity("ShoppingCart", b =>
+                {
+                    b.HasOne("ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Product");
                 });
 #pragma warning restore 612, 618
         }

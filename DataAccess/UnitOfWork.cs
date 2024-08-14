@@ -15,6 +15,7 @@ public class UnitOfWork : IUnitOfWork
     private IGenericRepository<Manufacturer> _Manufacturer;
     private IGenericRepository<Product> _Product;
     private IGenericRepository<ApplicationUser> _ApplicationUser;
+    private IGenericRepository<ShoppingCart> _ShoppingCart;
 
     public IGenericRepository<Category> Category
     {
@@ -29,6 +30,19 @@ public class UnitOfWork : IUnitOfWork
             return _Category;
         }
     }
+	public IGenericRepository<ShoppingCart> ShoppingCart
+	{
+		get
+		{
+
+			if (_ShoppingCart == null)
+			{
+				_ShoppingCart = new GenericRepository<ShoppingCart>(_dbContext);
+			}
+
+			return _ShoppingCart;
+		}
+	}
 
 	public IGenericRepository<ApplicationUser> ApplicationUser
 	{
