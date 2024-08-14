@@ -1,6 +1,7 @@
 ﻿using DataAccess;
 using Infrastructure.Interfaces;
 using Infrastructure.Models;
+using Microsoft.EntityFrameworkCore;
 
 public class UnitOfWork : IUnitOfWork
 {
@@ -16,6 +17,9 @@ public class UnitOfWork : IUnitOfWork
     private IGenericRepository<Product> _Product;
     private IGenericRepository<ApplicationUser> _ApplicationUser;
     private IGenericRepository<ShoppingCart> _ShoppingCart;
+    private IOrderHeaderRepository<OrderHeader> _OrderHeader;
+    private IGenericRepository<OrderDetails> _OrderDetails;
+
 
     public IGenericRepository<Category> Category
     {
@@ -30,7 +34,37 @@ public class UnitOfWork : IUnitOfWork
             return _Category;
         }
     }
-	public IGenericRepository<ShoppingCart> ShoppingCart
+
+
+      public IOrderHeaderRepository<OrderHeader> OrderHeader
+    {
+        get
+        {
+
+            if (_OrderHeader == null)
+            {
+                _OrderHeader = new OrderHeaderRepository(_dbContext);
+            }
+
+            return _OrderHeader;
+        }
+    }
+
+    public IGenericRepository<OrderDetails> OrderDetails
+    {
+        get
+        {
+
+            if (_OrderDetails == null)
+            {
+                _OrderDetails = new GenericRepository<OrderDetails>(_dbContext);
+            }
+
+            return _OrderDetails;
+        }
+    }
+
+    public IGenericRepository<ShoppingCart> ShoppingCart
 	{
 		get
 		{
