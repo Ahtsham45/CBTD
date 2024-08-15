@@ -1,6 +1,6 @@
-﻿using Infrastructure.Models;
+﻿using Infrastructure.Interfaces;
 
-namespace Infrastructure.Interfaces
+namespace Infrastructure.Models
 {
     public interface IUnitOfWork
     {

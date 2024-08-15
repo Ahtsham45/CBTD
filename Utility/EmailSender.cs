@@ -12,7 +12,7 @@ namespace Utility
 		public Task SendEmailAsync(string email, string subject, string htmlMessage)
 		{
 			var emailToSend = new MimeMessage();
-			emailToSend.From.Add(MailboxAddress.Parse("viettrung21@gmail.com"));
+			emailToSend.From.Add(MailboxAddress.Parse("mianahtsham45@gmail.com"));
 			emailToSend.To.Add(MailboxAddress.Parse(email));
 			emailToSend.Subject = subject;
 			emailToSend.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = htmlMessage };
@@ -22,7 +22,7 @@ namespace Utility
 				emailClient.Connect("smtp.gmail.com", 587, MailKit.Security.SecureSocketOptions.StartTls);
 				//valid email address, with special application password
 				//See https://support.google.com/mail/answer/185833?hl=en for details
-				emailClient.Authenticate("viettrung21@gmail.com", "vepu imps ylfp adgo");
+				emailClient.Authenticate("mianahtsham45.com", "vepu imps ylfp adgo");
 				emailClient.Send(emailToSend);
 				emailClient.Disconnect(true);
 			}

@@ -30,5 +30,14 @@ namespace DataAccess
             }
         }
 
-    }
+		public void UpdateStripePaymentID(int id, string sessionId, string paymentLinkId)
+		{
+			var orderFromDb = _db.OrderHeader.FirstOrDefault(u => u.Id == id);
+			orderFromDb.PaymentDate = DateTime.Now;
+			orderFromDb.SessionId = sessionId;
+			orderFromDb.PaymentIntentId = paymentLinkId;
+		}
+
+
+	}
 }
